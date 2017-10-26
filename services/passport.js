@@ -22,6 +22,13 @@ const strategy = new JwtStrategy(jwtOptions, function(payload, next) {
   })
 });
 
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 
 passport.use(strategy);
 

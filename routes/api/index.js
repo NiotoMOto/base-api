@@ -10,7 +10,7 @@ const models = require('../../mongo/')
 
 _.forEach(models, model => {
   if( model.private) {
-    restify.serve(router, model.model, {preMiddleware: passport.authenticate('jwt', { session: false })});
+    restify.serve(router, model.model, {preMiddleware: passport.authenticate('jwt', { session: true })});
   } else {
     restify.serve(router, model.model);
   }

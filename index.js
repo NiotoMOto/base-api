@@ -14,6 +14,13 @@ const passport = require('./services/passport');
 const User = require('mongoose').model('Users');
 
 const populateDatabase = require('./mongo/populate.js');
+
+
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true
+}
+
 populateDatabase();
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
@@ -31,7 +38,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(methodOverride());
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use(apiRoutes);
 app.use(publicRoutes);
