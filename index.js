@@ -14,7 +14,7 @@ const passport = require('./services/passport');
 const User = require('mongoose').model('Users');
 
 const populateDatabase = require('./mongo/populate.js');
-
+populateDatabase();
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
@@ -31,6 +31,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(methodOverride());
+app.use(cors());
 
 app.use(apiRoutes);
 app.use(publicRoutes);
