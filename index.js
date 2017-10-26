@@ -5,10 +5,13 @@ const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
-const apiRoutes = require('./routes/api');
-require('pretty-error').start();
 
-const PORT = 4011;
+const config = require('./config')
+const apiRoutes = require('./routes/api');
+const publicRoutes = require('./routes/public');
+const passport = require('./services/passport');
+
+const User = require('mongoose').model('Users');
 
 const populateDatabase = require('./mongo/populate.js');
 
@@ -22,13 +25,16 @@ if (app.get('env') === 'development') {
   });
 }
 
+app.use(passport.initialize());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json());
 app.use(methodOverride());
 
 app.use(apiRoutes);
+app.use(publicRoutes);
 
-populateDatabase();
-
-app.listen(4011, function () {
-  console.log(`Serveur mise en route sur le port ${PORT}`);
+app.listen(config.port, function () {
+  console.log(`Serveur mise en route sur le port ${config.port}`);
 });
