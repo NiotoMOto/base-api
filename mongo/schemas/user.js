@@ -23,6 +23,6 @@ schema.methods.verifyPassword = function(password, cb){
 };
 
 module.exports = {
-  private: true,
+  private: false,
   model: mongoose.model('Users', schema)
 };

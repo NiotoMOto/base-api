@@ -24,4 +24,21 @@ router.post('/login', (req, res) => {
   })
 });
 
+router.post('/register', (req, res) => {
+  try {
+    User.create(req.body).then(user => {
+      if(!user) {
+        res.sendStatus(401);
+      }else{
+        const payload = {id: user.id};
+        var token = jwt.sign(payload, config.secretOrKey);
+        res.json({user, token});
+      }
+    })
+  } catch(err) {
+    console.log(err)
+    res.sendStatus(500)
+  }
+});
+
 module.exports = router;
