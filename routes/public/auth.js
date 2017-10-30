@@ -24,6 +24,25 @@ router.post('/login', (req, res) => {
   })
 });
 
+router.post('/login/google', (req, res) => {
+  console.log('totoottoot', req)
+  const user = req.body.user;
+  User.findOne({ email: useremail }, (err, user) => {
+    if (!user) {
+      User.create(user).then(user => {
+        const payload = {id: user.id};
+        var token = jwt.sign(payload, config.secretOrKey);
+        res.json({user, token});
+      })
+      res.sendStatus(401);
+    } else {
+      const payload = {id: user.id};
+      var token = jwt.sign(payload, config.secretOrKey);
+      res.json({user, token});
+    }
+  })
+});
+
 router.post('/register', (req, res) => {
   try {
     User.create(req.body).then(user => {
