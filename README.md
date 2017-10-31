@@ -4,7 +4,7 @@ Nodejs api, which expose annonces and users for co-sport.com
 
 ### Prerequisites
 
-- mongodb server
+- mongodb server https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
 - node > 8.8.0
 
 ### Installing
