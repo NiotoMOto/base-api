@@ -7,7 +7,7 @@ const User = require('mongoose').model('Users');
 const jwt = require('jsonwebtoken');
 
 router.post('/login', (req, res) => {
-  User.findOne({ userName: req.body.userName }, (err, user) => {
+  User.findOne({ username: req.body.username }, (err, user) => {
     if(err || !user) {
       res.sendStatus(401);
     }else{
@@ -20,6 +20,46 @@ router.post('/login', (req, res) => {
           res.sendStatus(401);
         }
       });
+    }
+  })
+});
+
+router.post('/login/google', (req, res) => {
+  const googleUser = req.body.user;
+  User.findOne({ googleId: googleUser.googleId }, (err, user) => {
+    if (!user) {
+      User.create(googleUser).then(user => {
+        const payload = {id: user.id};
+        var token = jwt.sign(payload, config.secretOrKey);
+        res.json({user, token});
+      }).catch((err) => {
+        console.log(err)
+        res.status(500).json({ err })
+      })
+    } else {
+      const payload = {id: user.id};
+      var token = jwt.sign(payload, config.secretOrKey);
+      res.json({user, token});
+    }
+  })
+});
+
+router.post('/login/facebook', (req, res) => {
+  const facebookUser = req.body.user;
+  User.findOne({ facebookId: facebookUser.facebookId }, (err, user) => {
+    if (!user) {
+      User.create(facebookUser).then(user => {
+        const payload = {id: user.id};
+        var token = jwt.sign(payload, config.secretOrKey);
+        res.json({user, token});
+      }).catch((err) => {
+        console.log(err)
+        res.status(500).json({ err })
+      })
+    } else {
+      const payload = {id: user.id};
+      var token = jwt.sign(payload, config.secretOrKey);
+      res.json({user, token});
     }
   })
 });

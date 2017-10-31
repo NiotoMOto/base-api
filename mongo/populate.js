@@ -12,9 +12,9 @@ function populate(next) {
         Annonces.remove({}),
     ]).then(() => {
         Promise.all([
-            Users.create({ lastName: 'Guillemotoss', firstName: 'Antoine', userName: 'Nioto', password: 'toto' }),
-            Users.create({ lastName: 'Begain', firstName: 'Johan', userName: 'Arken', password: 'toto' }),
-            Users.create({ lastName: 'Cirjean', firstName: 'Remy', userName: 'Arkan', password: 'toto' }),
+            Users.create({ lastName: 'Guillemotoss', firstName: 'Antoine', username: 'Nioto', password: 'toto' }),
+            Users.create({ lastName: 'Begain', firstName: 'Johan', username: 'Arken', password: 'toto' }),
+            Users.create({ lastName: 'Cirjean', firstName: 'Remy', username: 'Arkan', password: 'toto' }),
         ]).then(users => {
             Annonces.create({ name: 'Foot st-ouen', creator: users[0] });
             Annonces.create({ name: 'Ping-pong Poissy', creator: users[1]});

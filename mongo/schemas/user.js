@@ -7,8 +7,10 @@ const Schema = mongoose.Schema;
 const schema = new Schema({
   lastName: { type: String },
   firstName: { type: String },
-  userName: { type: String },
+  username: { type: String },
   password: { type: String, bcrypt: true },
+  googleId: { type: Number },
+  facebookId: { type: Number }
 });
 
 schema.pre('save', function (next) {
