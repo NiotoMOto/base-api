@@ -1,3 +1,5 @@
 node_modules
 datas
 tmp
+
+config/index.js
