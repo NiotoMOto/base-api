@@ -7,7 +7,7 @@ const User = require('mongoose').model('Users');
 const jwt = require('jsonwebtoken');
 
 router.post('/login', (req, res) => {
-  User.findOne({ username: req.body.username }, (err, user) => {
+  User.findOne({ email: req.body.email }, (err, user) => {
     if(err || !user) {
       res.sendStatus(401);
     }else{

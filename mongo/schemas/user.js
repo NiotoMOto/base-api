@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
-
+const mailer = require('../../services/mail');
 const Schema = mongoose.Schema;
 
 
@@ -8,6 +8,7 @@ const schema = new Schema({
   lastName: { type: String },
   firstName: { type: String },
   username: { type: String },
+  email: { type: String },
   password: { type: String, bcrypt: true },
   googleId: { type: Number },
   facebookId: { type: Number }
@@ -23,6 +24,10 @@ schema.pre('save', function (next) {
 schema.methods.verifyPassword = function(password, cb){
   cb(bcrypt.compareSync(password, this.password));
 };
+
+schema.post('save', function(doc) {
+  mailer.sendMail(doc)
+});
 
 module.exports = {
   private: false,
