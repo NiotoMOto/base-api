@@ -4,7 +4,8 @@
   "description": "Api/parser pour stats elus de France",
   "main": "index.js",
   "scripts": {
-    "start": "supervisor index.js",
+    "dev": "supervisor index.js",
+    "start": "node index.js",
     "mongod": "mongod --dbpath ./datas",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
