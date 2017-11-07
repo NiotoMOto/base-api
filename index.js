@@ -37,7 +37,7 @@ if (app.get('env') === 'development') {
     });
   });
 }
-
+app.use(express.static('static'));
 app.use(passport.initialize());
 app.use(bodyParser.urlencoded({
   extended: true
