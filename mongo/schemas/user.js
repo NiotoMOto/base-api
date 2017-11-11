@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 const mailer = require('../../services/mail');
+const ShemaNames = require('../shemaNames');
+
 const Schema = mongoose.Schema;
 
 
@@ -11,7 +13,8 @@ const schema = new Schema({
   email: { type: String },
   password: { type: String, bcrypt: true },
   googleId: { type: Number },
-  facebookId: { type: Number }
+  facebookId: { type: Number },
+  sports: [ { type: Schema.Types.ObjectId, ref: ShemaNames.SPORT } ]
 });
 
 schema.pre('save', function (next) {
@@ -31,5 +34,5 @@ schema.post('save', function(doc) {
 
 module.exports = {
   private: false,
-  model: mongoose.model('Users', schema)
+  model: mongoose.model(ShemaNames.USER, schema)
 };
