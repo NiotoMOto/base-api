@@ -24,7 +24,7 @@ router.post('/login', (req, res) => {
   })
 });
 
-router.post('/login/google', (req, res) => {
+router.post('/register/google', (req, res) => {
   const googleUser = req.body.user;
   User.findOne({ googleId: googleUser.googleId }, (err, user) => {
     if (!user) {
@@ -33,9 +33,19 @@ router.post('/login/google', (req, res) => {
         var token = jwt.sign(payload, config.secretOrKey);
         res.json({user, token});
       }).catch((err) => {
-        console.log(err)
         res.status(500).json({ err })
       })
+    } else {
+      res.status(409).json({ message: 'user already exist' })
+    }
+  })
+});
+
+router.post('/login/google', (req, res) => {
+  const googleUser = req.body.user;
+  User.findOne({ googleId: googleUser.googleId }, (err, user) => {
+    if (!user) {
+      res.status(401).json({ message: 'User not register'});
     } else {
       const payload = {id: user.id};
       var token = jwt.sign(payload, config.secretOrKey);
@@ -44,7 +54,7 @@ router.post('/login/google', (req, res) => {
   })
 });
 
-router.post('/login/facebook', (req, res) => {
+router.post('/register/facebook', (req, res) => {
   const facebookUser = req.body.user;
   User.findOne({ facebookId: facebookUser.facebookId }, (err, user) => {
     if (!user) {
@@ -57,6 +67,18 @@ router.post('/login/facebook', (req, res) => {
         res.status(500).json({ err })
       })
     } else {
+      res.status(409).json({ message: 'user already exist' })
+    }
+  })
+});
+
+// res.status(500).json({ message: 'User already exist with this facebook id' })
+router.post('/login/facebook', (req, res) => {
+  const facebookUser = req.body.user;
+  User.findOne({ facebookId: facebookUser.facebookId }, (err, user) => {
+    if (!user) {
+     res.status(401).json({ message: 'User not register'});
+    } else {
       const payload = {id: user.id};
       var token = jwt.sign(payload, config.secretOrKey);
       res.json({user, token});
@@ -64,16 +86,13 @@ router.post('/login/facebook', (req, res) => {
   })
 });
 
+
 router.post('/register', (req, res) => {
   try {
     User.create(req.body).then(user => {
-      if(!user) {
-        res.sendStatus(401);
-      }else{
         const payload = {id: user.id};
         var token = jwt.sign(payload, config.secretOrKey);
         res.json({user, token});
-      }
     })
   } catch(err) {
     console.log(err)
