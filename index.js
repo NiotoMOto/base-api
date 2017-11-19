@@ -16,8 +16,14 @@ const User = require('mongoose').model('Users');
 const populateDatabase = require('./mongo/populate.js');
 
 
-const corsOptions = {
-  origin: 'http://localhost:3000',
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || config.origins.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
   credentials: true
 }
 
@@ -31,7 +37,7 @@ if (app.get('env') === 'development') {
     });
   });
 }
-
+app.use(express.static('static'));
 app.use(passport.initialize());
 app.use(bodyParser.urlencoded({
   extended: true
