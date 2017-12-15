@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const express = require('express');
-const config = require('../../config');
 
+const shemaNames = require('../../mongo/shemaNames');
+const config = require('../../config');
 const router = express.Router();
-const User = require('mongoose').model('Users');
+const User = require('mongoose').model(shemaNames.USER);
 const jwt = require('jsonwebtoken');
 
 router.post('/login', (req, res) => {

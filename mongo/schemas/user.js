@@ -28,9 +28,9 @@ schema.methods.verifyPassword = function(password, cb){
   cb(bcrypt.compareSync(password, this.password));
 };
 
-schema.post('save', function(doc) {
-  mailer.sendMail(doc)
-});
+// schema.post('save', function(doc) {
+//   mailer.sendMail(doc)
+// });
 
 module.exports = {
   private: false,
