@@ -7,7 +7,9 @@
     "dev": "supervisor -n error index.js",
     "start": "node index.js",
     "mongod": "mongod --dbpath ./datas",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -47,6 +49,8 @@
     "puid": "^1.0.7",
     "request-promise": "^4.2.1",
     "require-dir": "^0.3.2",
-    "uuid": "^3.1.0"
-  }
+    "uuid": "^3.1.0",
+    "snyk": "^1.316.1"
+  },
+  "snyk": true
 }
