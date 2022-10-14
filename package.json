@@ -34,7 +34,7 @@
     "csvtojson": "^1.1.6",
     "del": "^3.0.0",
     "express": "^4.15.3",
-    "express-restify-mongoose": "^4.3.0",
+    "express-restify-mongoose": "^6.1.2",
     "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",
     "method-override": "^2.3.9",
