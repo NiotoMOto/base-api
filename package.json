@@ -35,7 +35,7 @@
     "del": "^3.0.0",
     "express": "^4.15.3",
     "express-restify-mongoose": "^4.3.0",
-    "jsonwebtoken": "^8.1.0",
+    "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.4",
     "method-override": "^2.3.9",
     "mongoose": "^6.4.6",
