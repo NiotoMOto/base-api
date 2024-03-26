@@ -33,7 +33,7 @@
     "cors": "^2.8.3",
     "csvtojson": "^1.1.6",
     "del": "^3.0.0",
-    "express": "^4.15.3",
+    "express": "^4.19.2",
     "express-restify-mongoose": "^4.3.0",
     "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",
