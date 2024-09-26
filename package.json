@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/NiotoMOto/elus-api#readme",
   "dependencies": {
-    "adm-zip": "^0.4.7",
+    "adm-zip": "^0.5.2",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
